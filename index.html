@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QEMHack - Hvh GMOD client.</title>
+    <style>
+        :root {
+            --primary: #ff6b00;
+            --secondary: #333;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: var(--dark);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .slogan {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background-color: var(--dark);
+            padding: 1rem 0;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        nav li {
+            margin: 0 15px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        .hero {
+            background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .btn:hover {
+            background-color: #e05d00;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .features {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--secondary);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .download {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--secondary), var(--dark));
+            color: white;
+            text-align: center;
+        }
+        
+        .download .container {
+            max-width: 800px;
+        }
+        
+        .download-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 200px;
+            margin: 0 10px 20px;
+        }
+        
+        .step-number {
+            background-color: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .copyright {
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">GMOD Client</div>
+            <div class="slogan">Улучшенный клиент для Garry's Mod с дополнительными возможностями</div>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#features">Возможности</a></li>
+            <li><a href="#download">Скачать</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#support">Поддержка</a></li>
+        </ul>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Лучший клиент для Garry's Mod</h1>
+            <p>Улучшенная производительность, дополнительные функции и полная совместимость со всеми аддонами</p>
+            <a href="#download" class="btn">Скачать сейчас</a>
+        </div>
+    </section>
+    
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Наши возможности</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">HVH</h3>
+                    <p>Чит прекрасно служит для hvh.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3 class="feature-title">Доп. функции</h3>
+                    <p>hh</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3 class="feature-title">Автообновления</h3>
+                    <p>Автоматическое обновление клиента без необходимости ручных действий</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3 class="feature-title">Кастомизация</h3>
+                    <p>Гибкие настройки интерфейса и управления под ваши предпочтения</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3 class="feature-title">Совместимость</h3>
+                    <p>Полная поддержка всех популярных аддонов и модов</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="download" class="download">
+        <div class="container">
+            <h2 class="section-title">Скачать GMOD Client</h2>
+            <p>Последняя версия: 2.4.1 (совместима с Garry's Mod 13 и выше)</p>
+            
+            <div class="download-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Скачайте установщик</h3>
+                    <p>Нажмите кнопку ниже для загрузки</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Запустите установку</h3>
+                    <p>Следуйте инструкциям мастера установки</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Наслаждайтесь!</h3>
+                    <p>Запустите Garry's Mod как обычно</p>
+                </div>
+            </div>
+            
+            <a href="gmod_client_installer.exe" class="btn" download>Скачать (v2.4.1, 45 MB)</a>
+            <p style="margin-top: 1rem; opacity: 0.8;">Windows 7/8/10/11 | Поддержка: Windows x64</p>
+        </div>
+    </section>
+    
+    <section id="faq" class="features" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Частые вопросы</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3 class="feature-title">Как обновлять?</h3>
+                    <p>Клиент автоматически проверяет обновления при запуске. Вы также можете вручную скачать новую версию с нашего сайта.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Главная</a>
+                <a href="#features">Возможности</a>
+                <a href="#download">Скачать</a>
+                <a href="#faq">FAQ</a>
+                <a href="#support">Поддержка</a>
+                <a href="#">Политика конфиденциальности</a>
+            </div>
+            <div class="copyright">
+                © 2025 QEMHack. Не аффилирован с Facepunch Studios или Valve Corporation.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
